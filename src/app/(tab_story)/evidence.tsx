@@ -1,15 +1,18 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useStory } from "../../context/StoryContext";
 
-export default function EvidenceScreen() {
+export default function EvidenceBoardScreen() {
   const router = useRouter();
+  const { unlockedClues, totalCluesAvailable } = useStory();
 
   return (
     <SafeAreaView className="flex-1 bg-[#FDF3E1]" edges={['top']}>
-      <ScrollView contentContainerClassName="px-6 pt-6 pb-32">
+      <ScrollView contentContainerClassName="px-6 pt-6 pb-24">
         
+        {/* Header */}
         <View className="flex-row items-center mb-6">
           <TouchableOpacity 
             onPress={() => router.back()}
@@ -18,42 +21,54 @@ export default function EvidenceScreen() {
             <Feather name="arrow-left" size={24} color="#151B2C" />
           </TouchableOpacity>
           <View className="flex-1">
-            <Text className="text-2xl font-bold text-[#151B2C] text-center mr-16">Evidence Board</Text>
-            <Text className="text-sm text-[#151B2C]/70 text-center mr-16 mt-1">Your notes</Text>
+            <Text className="text-xl font-bold text-[#151B2C] text-center mr-16">Evidence Board</Text>
+            <Text className="text-sm text-[#151B2C]/70 text-center mr-16">Your notes</Text>
           </View>
         </View>
 
-        {/* Progress bars */}
+        {/* Progress */}
         <View className="flex-row space-x-2 mb-8">
-          <View className="flex-1 h-1.5 bg-[#ED6442] rounded-full" />
-          <View className="flex-1 h-1.5 bg-[#ED6442] rounded-full" />
-          <View className="flex-1 h-1.5 bg-[#ED6442] rounded-full" />
-          <View className="flex-1 h-1.5 bg-zinc-300 rounded-full" />
-          <View className="flex-1 h-1.5 bg-zinc-300 rounded-full" />
+          {Array.from({ length: 4 }).map((_, i) => (
+            <View 
+              key={i} 
+              className={`flex-1 h-1 rounded-full ${i < unlockedClues.length ? 'bg-[#ED6442]' : 'bg-zinc-200/50'}`}
+            />
+          ))}
         </View>
 
-        <View className="border border-[#151B2C] rounded-2xl p-5 mb-4 bg-[#FDF3E1]">
-          <Text className="text-lg font-bold text-[#151B2C] mb-2">How this works</Text>
-          <Text className="text-[#151B2C]/80 leading-5">
+        {/* Instructions */}
+        <View className="border border-[#151B2C] rounded-2xl p-4 bg-white mb-6">
+          <Text className="text-base font-bold text-[#151B2C] mb-1">How this works</Text>
+          <Text className="text-[#151B2C]/70 text-sm leading-5">
             Notes appear when you choose correctly. Every detail in the prose is a hint.
           </Text>
         </View>
 
-        <View className="border border-[#ED6442] rounded-2xl p-5 mb-4 bg-[#FFF9F0]">
-          <View className="flex-row justify-between items-start mb-2">
-            <Text className="text-lg font-bold text-[#151B2C]">Note 1</Text>
-            <Text className="text-2xl">🌅</Text>
+        {/* Clues */}
+        {unlockedClues.map((clue) => (
+          <View key={clue.id} className="border border-[#ED6442] rounded-3xl p-5 bg-white mb-4 shadow-sm relative overflow-hidden">
+            <Text className="text-base font-bold text-[#151B2C] mb-2">{clue.title}</Text>
+            <Text className="text-[#151B2C]/80 text-sm leading-5 pr-8">
+              {clue.description}
+            </Text>
+            <View className="absolute right-4 top-4">
+               <Text className="text-2xl opacity-80">✨</Text>
+            </View>
           </View>
-          <Text className="text-[#151B2C]/80 leading-5">
-            Blue orchids harvested in the greenhouse their resin yields a sedative compound. The brass mortar holds concentrated paste.
-          </Text>
-        </View>
+        ))}
 
-        <View className="border border-dashed border-[#151B2C]/50 rounded-2xl p-8 mb-4 bg-[#FDF3E1] items-center justify-center">
-          <Text className="text-3xl mb-3">📍</Text>
-          <Text className="text-lg font-bold text-[#151B2C] mb-1">4 more notes to find.</Text>
-          <Text className="text-[#151B2C]/70">Follow the correct path</Text>
-        </View>
+        {/* Remaining Clues */}
+        {totalCluesAvailable - unlockedClues.length > 0 && (
+          <View className="border border-dashed border-[#151B2C]/30 rounded-3xl p-6 bg-zinc-200/30 items-center justify-center mt-2 mb-10">
+            <Text className="text-3xl mb-2">🧩</Text>
+            <Text className="text-base font-bold text-[#151B2C] mb-1 text-center">
+              {totalCluesAvailable - unlockedClues.length} more notes to find.
+            </Text>
+            <Text className="text-[#151B2C]/70 text-sm text-center">
+              Follow the correct path
+            </Text>
+          </View>
+        )}
 
       </ScrollView>
     </SafeAreaView>

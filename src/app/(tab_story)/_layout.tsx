@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { StoryProvider } from "../../context/StoryContext";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -54,18 +55,19 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
 
 export default function TabStoryLayout() {
   return (
-    <Tabs 
-      // tabBar={(props) => <CustomTabBar {...props} />} 
-      screenOptions={{ 
-        headerShown: false, 
-        sceneStyle: { backgroundColor: "#FDF3E1" },
-        tabBarStyle: { display: "none" }
-      }}
-    >
-      <Tabs.Screen name="index" />
-      <Tabs.Screen name="evidence" />
-      <Tabs.Screen name="path" />
-      <Tabs.Screen name="ending" options={{ href: null }} />
-    </Tabs>
+    <StoryProvider>
+      <Tabs 
+        tabBar={(props) => <CustomTabBar {...props} />} 
+        screenOptions={{ 
+          headerShown: false, 
+          sceneStyle: { backgroundColor: "#FDF3E1" },
+        }}
+      >
+        <Tabs.Screen name="index" />
+        <Tabs.Screen name="evidence" />
+        <Tabs.Screen name="path" />
+        <Tabs.Screen name="ending" options={{ href: null }} />
+      </Tabs>
+    </StoryProvider>
   );
 }
