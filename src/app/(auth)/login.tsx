@@ -46,7 +46,7 @@ export default function LoginScreen() {
 
           <PrimaryButton 
             title="Login" 
-            onPress={() => router.replace("/adult-content")}
+            onPress={() => router.replace("/(tabs)" as any)}
           />
 
           <View className="flex-row items-center my-8">

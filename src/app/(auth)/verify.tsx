@@ -34,7 +34,7 @@ export default function VerifyEmailScreen() {
         <View className="mt-auto w-full space-y-4">
           <PrimaryButton
             title="I've verified my email"
-            onPress={() => router.replace("/gate")}
+            onPress={() => router.replace("/(tabs)" as any)}
           />
 
           <TouchableOpacity className="border border-[#151B2C] py-4 mt-3 rounded-full flex-row justify-center items-center">
