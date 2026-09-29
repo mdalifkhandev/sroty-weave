@@ -40,18 +40,23 @@ export default function ProfileScreen() {
           </View>
 
           {/* Stats */}
-          <View className="flex-row justify-between space-x-3">
-            <View className="flex-1 border border-[#151B2C] rounded-2xl py-4 items-center bg-[#FDF3E1]">
-              <Text className="text-2xl font-bold text-[#151B2C] mb-1">12</Text>
-              <Text className="text-[#151B2C]/70 text-sm">Stories</Text>
+          <View className="flex-row items-center justify-between gap-3 mt-6">
+            {/* Stat 1 */}
+            <View className="flex-1 items-center justify-center py-4 border border-[#151B2C] rounded-2xl bg-[#FDF3E1]">
+              <Text className="text-2xl font-bold text-[#151B2C]">12</Text>
+              <Text className="text-xs text-[#151B2C]/70 mt-1">Stories</Text>
             </View>
-            <View className="flex-1 border border-[#151B2C] rounded-2xl py-4 items-center bg-[#FDF3E1]">
-              <Text className="text-2xl font-bold text-[#151B2C] mb-1">94</Text>
-              <Text className="text-[#151B2C]/70 text-sm">Choices</Text>
+
+            {/* Stat 2 */}
+            <View className="flex-1 items-center justify-center py-4 border border-[#151B2C] rounded-2xl bg-[#FDF3E1]">
+              <Text className="text-2xl font-bold text-[#151B2C]">94</Text>
+              <Text className="text-xs text-[#151B2C]/70 mt-1">Choices</Text>
             </View>
-            <View className="flex-1 border border-[#151B2C] rounded-2xl py-4 items-center bg-[#FDF3E1]">
-              <Text className="text-2xl font-bold text-[#151B2C] mb-1">03</Text>
-              <Text className="text-[#151B2C]/70 text-sm">Solved</Text>
+
+            {/* Stat 3 */}
+            <View className="flex-1 items-center justify-center py-4 border border-[#151B2C] rounded-2xl bg-[#FDF3E1]">
+              <Text className="text-2xl font-bold text-[#151B2C]">03</Text>
+              <Text className="text-xs text-[#151B2C]/70 mt-1">Solved</Text>
             </View>
           </View>
         </View>
