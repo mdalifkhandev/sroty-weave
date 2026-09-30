@@ -53,8 +53,26 @@ git pull origin main
 ```
 
 
+---
 
+## 🚀 Advanced: GitHub CLI (`gh`) Workflow
 
-```
+You can completely skip going to the browser by using the GitHub CLI directly from your terminal!
+
+### 7. Create Pull Request
+Create the PR directly to the `main` branch.
+```bash
 gh pr create --title "My code updates" --body "Safely pushing new code" --base main
+```
+
+### 8. Review Code
+Check exactly what code changes are in your PR before merging.
+```bash
+gh pr diff
+```
+
+### 9. Merge Pull Request
+Approve and merge the code into `main`, and automatically delete the temporary branch to keep your repository clean.
+```bash
+gh pr merge --merge --delete-branch
 ```
