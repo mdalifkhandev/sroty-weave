@@ -51,3 +51,10 @@ Pull the latest changes so your local machine stays in sync:
 ```bash
 git pull origin main
 ```
+
+
+
+
+```
+gh pr create --title "My code updates" --body "Safely pushing new code" --base main
+```
