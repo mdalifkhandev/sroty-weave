@@ -76,3 +76,8 @@ Approve and merge the code into `main`, and automatically delete the temporary b
 ```bash
 gh pr merge --merge --delete-branch
 ```
+
+
+```
+gh pr create --title '' --body '' --base main
+```
